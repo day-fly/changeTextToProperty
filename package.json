@@ -1,0 +1,23 @@
+{
+  "name": "t_to_p",
+  "version": "0.1.0",
+  "description": "",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddanguri/changeTextToProperty.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ddanguri/changeTextToProperty/issues"
+  },
+  "homepage": "https://github.com/ddanguri/changeTextToProperty#readme",
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "walk": "^2.3.9"
+  }
+}
