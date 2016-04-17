@@ -78,16 +78,17 @@
    var postfix = "'/>";
 
    textNodeArray.forEach(function addPreAndPost(node) {
-     //node.nodeValue = prefix + node.nodeValue + postfix;
+     node.nodeValue = prefix + node.nodeValue + postfix;
      //node.nodeValue = "<spring:message code='test.code'/>";
-     node.innerHTML = "<b>" + node.nodeValue + "</b>";
+     console.log(node.nodeType + "," + node.nodeValue);
+     //node.innerHTML = "<b>" + node.nodeValue + "</b>";
      //console.log(node.nodeValue);
    });
 
    var changeContent = $(jqId(openFileName + "_origin")).html();
    //var changeContent = "<b>abcd</b>";
    try {
-     $(jqId(openFileName)).html("<xmp>" + changeContent + "</xmp>");
+     $(jqId(openFileName)).html("<xmp>" + changeContent.replace(/&lt;/g, '<').replace(/&gt;/g, '>')  + "</xmp>");
      //$(jqId(openFileName)).html("<pre class='hljs'><code class='html'>" + hljs.highlight("html", changeContent).value + "</code></pre>");
      //hljs.initHighlighting();
    } catch (e) {
