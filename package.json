@@ -1,23 +1,28 @@
 {
-  "name": "t_to_p",
+  "name": "changeTextToProperty",
   "version": "0.1.0",
-  "description": "",
-  "main": "js/index.js",
+  "author": "",
+  "main": "app/js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
+  },
+  "temp_scripts":{
+    "build": "electron-packager . changeTextToProperty --platform=win32 --arch=ia32"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ddanguri/changeTextToProperty.git"
   },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ddanguri/changeTextToProperty/issues"
   },
   "homepage": "https://github.com/ddanguri/changeTextToProperty#readme",
   "dependencies": {
-    "jquery": "^2.2.3",
-    "walk": "^2.3.9"
+    "jquery": "^2.2.3"
+  },
+  "devDependencies": {
+    "electron-packager": "^6.0.2",
+    "electron-prebuilt": "^0.37.6"
   }
 }
