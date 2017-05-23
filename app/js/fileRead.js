@@ -9,17 +9,17 @@
  const RegExpServerside2 = /<%@.*%>/g; //서버사이드
  const RegExpServersideVars = /\${.*}/g; //서버사이드 variable
 
- var remote = require('remote'),
-   dialog = remote.require('dialog'),
-   fs = require('fs'),
-   hljs = require('highlight.js'),
+const {dialog} = require('electron').remote
+
+ var fs = require('fs'),
+   //hljs = require('highlight.js'),
    textNodeArray = [],
    openFileName,
    walker;
 
-   hljs.configure({
-     tabReplace: '  '
-   });
+  //  hljs.configure({
+  //    tabReplace: '  '
+  //  });
 
  function openFile() {
    dialog.showOpenDialog({
@@ -42,28 +42,31 @@
    filesNames.forEach(
      function(fileName) {
        fs.readFile(fileName, 'utf-8', function(err, data) {
-
          //temp = data.replace(RegExpDS,"").replace(RegExpServerside,"").replace(RegExpServerside2,"").replace(RegExpServersideVars,"");
          openFileName = fileName;
-         try{
-           $('#results').append("<div id='" + fileName + "_origin' style='display:none;'>" + data + "</div>");
-           $('#results').append("<div id='" + fileName + "'><xmp>" + data + "</xmp></div>");
-           //$('#results').append("<div id='" + fileName + "'><pre class='hljs'><code class='html'>" + hljs.highlight("html", data).value + "</code></pre></div>");
-           //hljs.initHighlighting();
-         }catch(e){
-           //nothing
-         }
-         console.log("###############");
+        //  try{
+        $('#results').append("<div id='" + fileName + "_origin' style='display:none;'>" + data + "</div>");
+        $('#results').append("<div id='" + fileName + "'><xmp>" + data + "</xmp></div>");
+        //    //$('#results').append("<div id='" + fileName + "'><pre class='hljs'><code class='html'>" + hljs.highlight("html", data).value + "</code></pre></div>");
+        //    //hljs.initHighlighting();
+        //  }catch(e){
+        //    //nothing
+        //  }
+          console.log("fileName : " + fileName);
          var walker = document.createTreeWalker(document.getElementById(fileName + "_origin"), NodeFilter.SHOW_TEXT, null, false)
+         //var walker = document.createTreeWalker(document.getElementById(fileName), NodeFilter.SHOW_TEXT, null, false)
          while (walker.nextNode()) {
            var nodeType = walker.currentNode.nodeType;
-           var nodeValue = walker.currentNode.nodeValue;
+           var nodeValue = $.trim(walker.currentNode.nodeValue);
+           console.log("nodeType : " + nodeType + ", nodeValue : " + nodeValue + " : " + RegExpServersideVars.test(nodeValue));
 
-           if (nodeType == 3 && $.trim(nodeValue) != '') {
+
+           if (nodeType == 3 && nodeValue != '') {
              if(RegExpDS.test(nodeValue) || RegExpServerside.test(nodeValue) || RegExpServerside2.test(nodeValue) || RegExpServersideVars.test(nodeValue)){
-               //nothing
+               console.log("if : " + nodeValue);
              }
              else{
+               console.log("else : " + nodeValue);
                 textNodeArray.push(walker.currentNode);
              }
            }  //end if
@@ -71,6 +74,7 @@
        });
      }
    );
+   console.dir(textNodeArray);
  }
 
  function changeText() {
