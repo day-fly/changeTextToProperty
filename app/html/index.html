@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="../../node_modules/highlight.js/styles/sunburst.css"/>
 
 <head>
+  <link rel="stylesheet" href="../../node_modules/spectre.css/dist/spectre.min.css" />
   <meta charset="UTF-8">
 </head>
 
 <body>
-  <button id="openFile" onclick="openFile();">Open</button>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column col-6">col-6</div>
+      <div class="column col-3">col-3</div>
+      <div class="column col-2">col-2</div>
+      <div class="column col-1">col-1</div>
+    </div>
+
+    <div class="columns col-gapless">
+      <div class="column col-6">col-6</div>
+      <div class="column col-6">col-6</div>
+    </div>
+  </div>
+
+  <button id="openFile" onclick="openFile();">File Open</button>
   <button id="changeText" onclick="changeText();">Save</button>
   <br />
+  code
+  <div id="_code" style="display:none;"></div>
 
-  <div id="fileContents" style="display:none;"></div>
-  <div id="results"></div>
+  보여짐
+  <div id="code"></div>
 
-  <script language="javascript" src="../js/fileRead.js"></script>
+  <script language="javascript" src="../js/core.js"></script>
 </body>
+
 </html>
